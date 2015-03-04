@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>image register list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/static/js/admin_image_register_list.js"></script>
+  </head>
+
+  <body>
+
+    <h2>Image Register List</h2>
+ 
+    <form action="" method="post" enctype="multipart/form-data">
+      <input type="file" value="file_name" name="file_name"><br />
+      <input type="submit" value="upload">
+    </form>
+
+    {% if image_s %}
+      <form action="/admin/image_register/" method="post">
+        <input type="submit" value="register">
+        <table border=1>
+          <tr>
+            <th>Image</th> 
+            <th>ASIN</th>
+            <th>Brand</th>
+            <th>category</th>
+            <th><input type="checkbox" id="allCheck" /></th>
+          </tr>
+          {% for image in image_s %}
+            </tr>
+              <td><img src="{{ image.image_url }}" /></td>
+              <td>{{ image.image_asin }}</td>
+              <td>{{ image.image_brand }}</td>
+              <td>{{ image.image_category }}</td>
+              <td><input type="checkbox" name="image_asin" value="{{ image.image_asin }}" /></td>
+            </tr>
+          {% endfor %}
+        </table>      
+        <input type="hidden" name="upload_file_name" value="{{ upload_file_name }}" />
+      </form>
+    {% endif %}
+
+  </body>
+</html>

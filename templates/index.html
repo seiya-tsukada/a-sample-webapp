@@ -1,0 +1,57 @@
+<html class="fsvs">
+    <head>
+        <title>whiteray.tokyo favorite image sharing</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="/static/css/style.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/static/css/my-style.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script src="/static/js/fsvs.js"></script>
+        <script src="/static/js/my.js"></script>
+        <script src="/static/js/analytics.js"></script>
+    </head>
+    <body>
+        <div id="fsvs-body">
+            <div class="slide my-center">
+              <div class="my-title">
+                
+                Introduction<br />
+
+                {% for category in category_list %}
+                  {{ category.category_name }}<br />
+                {% endfor %}
+
+              </div>
+
+              {% include "my_affi/slide1.html" %}
+
+            </div>
+
+
+            {% for category in category_list %}
+              <div class="slide my-center">
+                
+                <div class="my-title"><a href="/{{ category.category_name }}/">{{ category.category_print }}</a></div>
+                  
+                  {% for key in images_dict.keys() %}
+                    {% if key == category.category_name %} 
+                      {% for image in images_dict[key] %}
+
+                        <img src="{{ image.images_url }}" width="320" height="240" />
+
+                        {% if loop.index % 3 == 0 %}
+                          <br />
+                        {% endif %}
+
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                  
+              {% include "%s%i.html" | format("my_affi/slide",loop.index + 1) %}
+
+              </div>
+            {% endfor %}
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>favorite {{category}} image sharing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="/static/css/category.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/static/css/thickbox.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/static/js/analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/static/js/thickbox-compressed.js"></script>
+  </head>
+  <body>
+
+    <div class="category-center category-title">
+      {{ category }}
+    </div>
+
+    <br />
+
+    <div class="category-center">
+      {% for image in image_s %}
+        <a href="/tbox/?image_asin={{ image.images_asin }}&keepThis=true&TB_iframe=true&height=350&width=300" title="{{ image.images_genre }}" class="thickbox"><img src="{{ image.images_url }}" width="320" height="240"/></a>
+        {% if loop.index % 3 == 0 %}
+          <br />
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </body>
+</html>

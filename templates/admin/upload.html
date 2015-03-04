@@ -1,0 +1,19 @@
+<html>
+  <head>
+      <title>upload tool</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <form action="" method="post" enctype="multipart/form-data">
+      <input type="file" value="file_name" name="file_name"><br />
+      <input type="submit" value="upload">
+    </form>
+
+    {% if message %}
+      {{ message }}
+    {% endif %}
+  
+  </body>
+</html>
