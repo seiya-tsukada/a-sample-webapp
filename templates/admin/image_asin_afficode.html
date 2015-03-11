@@ -2,13 +2,41 @@
   <head>
       <title>image asin afficode</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/static/js/admin_image_asin_afficode.js"></script>
   </head>
 
   <body>
 
     <h2>Image Asin Afficode</h2>
 
-    test
+    {{ list_count }}件
+    <br />
+    <br />
+    <input id="register-button" type="button" name="register" value="Register">
+    <br />
+    <table border=1>
+      <tr>
+        <th>Image</th>
+        <th>Category</th>
+        <th>Genre</th>
+        <th>Asin</th>
+        <th>Affiliate_code_url</th>
+        <th>Delete</th>
+      </tr>
+      {% for image_hash in image_asin_list %}
+
+        <tr>  
+          <td><img src="{{ image_hash.images_url }}" /></td>
+          <td>{{ image_hash.images_category }}</td>
+          <td>{{ image_hash.images_genre }}</td>
+          <td>{{ image_hash.images_asin }}</td>
+          <td><textarea rows="4" cols="100" type="text" name="affiliate_code_url"></textarea></td>
+          <td><input class="image-delete-button" type="button" name="image-delete-button" value="delete" asin="{{ image_hash.images_asin }}"></td>
+        </tr>  
+
+      {% endfor %}
+    </table>
 
   </body>
 </html>

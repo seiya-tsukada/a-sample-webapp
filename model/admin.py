@@ -1,7 +1,7 @@
 #! /bin/env python
 # coding: utf-8
 
-from model.db import ImagesModel
+from model.db import ImagesModel, AffiliatecodeModel
 import csv , time
 import pprint
 
@@ -44,6 +44,15 @@ class AdminModel(object):
 
     return ret
 
+  def get_image_afficode_all_for_db(self):
+
+    ret = list()
+  
+    im = ImagesModel()
+    ret = im.get_image_afficode_all()
+  
+    return ret
+
   def image_insert(self, image_hash_s):
     im = ImagesModel()
     count = 0
@@ -55,3 +64,44 @@ class AdminModel(object):
       time.sleep(0.5)      
 
     return count
+
+  def image_delete(self, asin):
+    im = ImagesModel()
+
+    ret = im.image_delete(asin)
+
+    if ret == 0:
+      return "OK"
+    else:
+      return "NG"
+
+  def affiliate_insert(self, asin, affiliate_code):
+
+    afm = AffiliatecodeModel()
+
+    print "admin model"
+    ret = afm.affiliate_insert(asin, affiliate_code)
+    
+    time.sleep(0.5)
+
+    if ret == 0:
+      return "OK"
+    else:
+      return "NG"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

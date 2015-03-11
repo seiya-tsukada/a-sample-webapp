@@ -14,10 +14,18 @@ def index():
 
   image_asin = request.args.get("image_asin")
   im = ImagesModel()
+
+  image_print_affi_or_image = None
   image_print_url = None
   
   image_hash = im.get_image_afficode_for_asin(image_asin)
 
   image_print_url = unicode(image_hash[0]["affiliate_code_url"], "utf-8") if image_hash[0]["affiliate_code_url"] else ""
 
-  return render_template("tbox/index.html", image_print_url = image_print_url)
+  # print affiliate or image
+  if image_print_url:
+    image_print_affi_or_image = True
+  else:
+    image_print_url = image_hash[0]["images_url"]
+
+  return render_template("tbox/index.html", image_print_url = image_print_url, image_print_affi_or_image = image_print_affi_or_image)

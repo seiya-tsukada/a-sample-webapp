@@ -4,9 +4,13 @@
     
     <style type="text/css">
     <!--
-    .tbox-center table{  
+    .tbox-affi-center table{  
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .tbox-image-center {
+      text-align: center;
     }
     -->
     </style>
@@ -14,13 +18,21 @@
   </head>
   <body>
 
-  <div class="tbox-center">
-  {% autoescape false %}
+  {% if image_print_affi_or_image %}
+    <div class="tbox-affi-center">
+      {% autoescape false %}
+  
+        {{ image_print_url }}
+  
+      {% endautoescape %}
+    </div>
+  {% else %}
+    <div class="tbox-image-center">
 
-    {{ image_print_url }}
+      <img src="{{ image_print_url }}" />
 
-  {% endautoescape %}
-  </div>
+    </div>
+  {% endif %}
 
   </body>
 </html>

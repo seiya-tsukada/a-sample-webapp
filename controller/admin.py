@@ -50,7 +50,12 @@ def adminImageRegister():
 @admin.route("/image_asin_afficode/")
 def adminAsinAfficode():
 
-  return render_template("admin/image_asin_afficode.html")
+  image_asin_list = list()
+
+  am = AdminModel()
+  image_asin_list = am.get_image_afficode_all_for_db()
+
+  return render_template("admin/image_asin_afficode.html", image_asin_list = image_asin_list, list_count = len(image_asin_list))
 
 #@admin.route("/upload/", methods=["GET", "POST"])
 #def adminUpload():

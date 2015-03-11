@@ -101,6 +101,19 @@ class ImagesModel(DbConnect):
 
     return ret
 
+  def get_image_afficode_all(self):
+
+    sql = """\
+      SELECT * FROM images 
+      WHERE images_asin NOT IN 
+      (
+      SELECT affiliate_code_asin FROM affiliate_code
+      )
+    """
+    ret = self.db_select(sql)
+
+    return ret
+
   def image_insert(self, image_hash):
 
     sql = "SELECT images_asin FROM images WHERE images_asin = '{0}'".format(image_hash["image_asin"])
@@ -117,3 +130,37 @@ class ImagesModel(DbConnect):
         return int(1)
  
     return int(0)
+
+  def image_delete(self, asin):
+
+    sql = "DELETE FROM images WHERE images_asin = '{0}'".format(asin)
+
+    ret = self.db_execute(sql)
+
+    if ret == 1:
+      self.conn.commit()
+      return int(0)
+
+    return int(100)
+
+class AffiliatecodeModel(DbConnect):
+
+  def __init__(self):
+    self.db_define()
+
+    return
+
+  def affiliate_insert(self, asin, affiliate_code_url):
+
+    sql = """\
+      INSERT INTO affiliate_code (affiliate_code_id, affiliate_code_asin, affiliate_code_url)
+      VALUES(NULL, '{0}', '{1}')
+    """.format(asin.encode("utf-8"), affiliate_code_url.encode("utf-8"))
+
+    ret = self.db_execute(sql)
+    
+    if ret == 1:
+      self.conn.commit()
+      return int(0)
+
+    return int(100)

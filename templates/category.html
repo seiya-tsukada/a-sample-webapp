@@ -16,6 +16,8 @@
 
     <br />
 
+     {% include "my_affi/category.html" %}
+
     <div class="category-center">
       {% for image in image_s %}
         <a href="/tbox/?image_asin={{ image.images_asin }}&keepThis=true&TB_iframe=true&height=350&width=300" title="{{ image.images_genre }}" class="thickbox"><img src="{{ image.images_url }}" width="320" height="240"/></a>

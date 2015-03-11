@@ -57,6 +57,7 @@
 	text-align:left;
 	top:50%;
 	left:50%;
+  margin-top: -200px;
 }
 
 * html #TB_window { /* ie6 hack */
