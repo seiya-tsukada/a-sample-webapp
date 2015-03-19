@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>category list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <h2>Category List</h2>
+ 
+    <table border=1>
+      <tr> 
+        <th>Category Name</th>
+        <th>Category Print</th>
+        <th>Category Sort</th>
+      </tr>
+      {% for category in category_list %}
+      <tr>
+        <td align="center">{{category.category_name}}</td>
+        <td align="center">{{category.category_print}}</td>
+        <td align="center">{{category.category_sort}}</td>
+      </tr>
+      {% endfor %}
+    <table>
+
+    {% for error in form.errors %}
+      <p class=error><strong>Error:</strong> {{ form.errors[error][0] }}
+    {% endfor %}
+
+    <br />
+
+    <form method="POST" action="">
+      <table border=1>
+        <tr>
+          <th>{{ form.category_name.label }}</th>
+          <td>{{ form.category_name() }}</td>
+        </tr>
+        <tr>
+          <th>{{ form.category_print.label }}</th>
+          <td>{{ form.category_print() }}</td> 
+        </tr>
+        <tr>
+          <th>{{ form.category_sort.label }}</th>
+          <td>{{ form.category_sort() }}</td> 
+        </tr>
+      </table>
+      <input type="submit" value="submit"/>
+    </form>
+
+  </body>
+</html>

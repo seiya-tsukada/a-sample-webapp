@@ -1,11 +1,25 @@
 #! /bin/env python
 # coding: utf-8
 
-from model.db import ImagesModel, AffiliatecodeModel
+from model.db import CategoryModel, ImagesModel, AffiliatecodeModel
 import csv , time
 import pprint
 
 class AdminModel(object):
+
+  def get_category_list(self):
+    cm = CategoryModel()
+
+    ret = cm.get_category_all()
+
+    return ret
+  
+  def category_insert(self, category_dict):
+    cm = CategoryModel()
+
+    ret = cm.category_insert(category_dict)
+
+    return ret    
 
   def get_image_list_for_file_all(self, target_file):
     ret = list()
@@ -79,7 +93,6 @@ class AdminModel(object):
 
     afm = AffiliatecodeModel()
 
-    print "admin model"
     ret = afm.affiliate_insert(asin, affiliate_code)
     
     time.sleep(0.5)
@@ -88,20 +101,3 @@ class AdminModel(object):
       return "OK"
     else:
       return "NG"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

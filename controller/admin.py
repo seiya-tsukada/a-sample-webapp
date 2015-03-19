@@ -4,6 +4,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 from werkzeug import secure_filename
 from model.admin import AdminModel
+from model.form import AdminCategoryListForm
 import os, commands, json
 import pprint
 
@@ -57,21 +58,23 @@ def adminAsinAfficode():
 
   return render_template("admin/image_asin_afficode.html", image_asin_list = image_asin_list, list_count = len(image_asin_list))
 
-#@admin.route("/upload/", methods=["GET", "POST"])
-#def adminUpload():
-#
-#  if request.method == "POST":
-#    upload_dir = "/tmp"
-#    f = request.files["file_name"]
-#    file_name = secure_filename(f.filename)
-#
-#    upload_file_name = os.path.join(upload_dir, file_name)
-#    f.save(upload_file_name)
-#
-#    exec_command = "python /var/app/script/import.py {0}".format(upload_file_name)
-#    ans = commands.getoutput(exec_command)
-# 
-#    return render_template("admin/upload.html", message = "success") 
-#
-#  return render_template("admin/upload.html")
+@admin.route("/category_list/", methods=["GET", "POST"])
+def adminCategoryList():
 
+  form = AdminCategoryListForm(request.form)
+  am = AdminModel()
+
+  category_list = am.get_category_list()
+
+  if request.method == "POST" and form.validate():
+  
+    category_dict = {}
+    category_dict["category_name"] = form.category_name.data.encode("utf-8")
+    category_dict["category_print"] = form.category_print.data.encode("utf-8")
+    category_dict["category_sort"] = int(form.category_sort.data)
+
+    am.category_insert(category_dict)
+
+    return redirect(url_for("admin.adminCategoryList", _external=True))
+
+  return render_template("admin/category_list.html", form = form, category_list = category_list)

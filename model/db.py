@@ -62,6 +62,27 @@ class CategoryModel(DbConnect):
 
     return ret
 
+  def category_insert(self, category_dict):
+
+    category_name = category_dict["category_name"]
+    category_print = category_dict["category_print"]
+    category_sort = category_dict["category_sort"]
+
+    sql = """
+      INSERT INTO category (category_id, category_name, category_print, category_sort) 
+      VALUE(NULL, '{0}', '{1}', {2})
+    """.format(category_name, category_print, category_sort)
+
+    ret = self.db_execute(sql)
+
+    print sql
+
+    if ret == 1:
+      self.conn.commit()
+      return int(0)
+
+    return int(100)
+
 class ImagesModel(DbConnect):
 
   def __init__(self):
