@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>register category list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+
+    <h2>Register Category List</h2>
+
+    <a href="/admin/">戻る</a><br /><br />
+
+    {% for image_genre in images_genre %}
+      <h3>{{ image_genre }}</h3>
+      <ul>
+      {% for genre in images_genre[image_genre] %}
+        <li><strong>{{ genre }}</strong></li>
+      {% endfor %}
+      </ul>
+    {% endfor %}
+
+  </body>
+</html>

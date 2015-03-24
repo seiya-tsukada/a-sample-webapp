@@ -101,3 +101,29 @@ class AdminModel(object):
       return "OK"
     else:
       return "NG"
+
+  def get_images_genre(self):
+
+    im = ImagesModel()
+    cm = CategoryModel()
+    
+    category_name_list = list()
+    ret_images_genre = dict()
+
+    category_name_tp = cm.get_category_name()
+    
+    for category in category_name_tp:
+      category_name_list.append(category["category_name"])
+
+    for category_name in category_name_list:
+      tmp_ig_tp = None
+      tmp_ig_tp = im.get_images_category_name(category_name)
+      tmp_ig_list = list()
+
+      for ig in tmp_ig_tp:
+        tmp_ig_list.append(ig["images_genre"])
+
+      ret_images_genre[category_name] = tmp_ig_list
+
+    return ret_images_genre      
+  

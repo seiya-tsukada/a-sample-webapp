@@ -62,6 +62,14 @@ class CategoryModel(DbConnect):
 
     return ret
 
+  def get_category_name(self):
+    
+    sql = "SELECT category_name FROM category;"
+
+    ret = self.db_select(sql)
+
+    return ret
+  
   def category_insert(self, category_dict):
 
     category_name = category_dict["category_name"]
@@ -74,8 +82,6 @@ class CategoryModel(DbConnect):
     """.format(category_name, category_print, category_sort)
 
     ret = self.db_execute(sql)
-
-    print sql
 
     if ret == 1:
       self.conn.commit()
@@ -113,6 +119,17 @@ class ImagesModel(DbConnect):
     ret = self.db_select(sql)
 
     return ret
+
+  def get_images_category_name(self, category_name):
+
+    sql = """
+      SELECT images_category, images_genre  FROM images 
+      WHERE images_category = '{0}' GROUP BY images_genre
+    """.format(category_name)
+
+    ret = self.db_select(sql)
+
+    return ret    
 
   def get_image_afficode_for_asin(self, image_asin):
 

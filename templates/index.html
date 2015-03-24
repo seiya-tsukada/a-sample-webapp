@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="google-site-verification" content="wRfGa155trNbwMOsTH0y7ecNNfS-3dN5Wyyp59jwwRQ" />
     <meta name="description" content="好きなブランドのアイテムをたらたら紹介するページです" />
-    <meta name="keywords" content="ブランド,サングラス,時計,ネックレス" />
+    <meta name="keywords" content="ブランド,サングラス,時計,ネックレス,ブレスレット" />
     <link href="/static/css/style.css" media="all" rel="stylesheet" type="text/css" />
     <link href="/static/css/my-style.css" media="all" rel="stylesheet" type="text/css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -23,7 +23,7 @@
           Item List<br />
 
           {% for category in category_list %}
-            {{ category.category_name }}<br />
+            <a href="/{{ category.category_name }}">{{ category.category_name }}</a><br />
           {% endfor %}
 
         </div>

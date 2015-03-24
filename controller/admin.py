@@ -78,3 +78,13 @@ def adminCategoryList():
     return redirect(url_for("admin.adminCategoryList", _external=True))
 
   return render_template("admin/category_list.html", form = form, category_list = category_list)
+
+@admin.route("/register_category_list/", methods=["GET"])
+def adminRegisterCategoryList():
+
+  am = AdminModel()
+
+  images_genre = am.get_images_genre()
+    
+  return render_template("admin/register_category_list.html", images_genre = images_genre)  
+
