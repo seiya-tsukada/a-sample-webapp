@@ -1,7 +1,7 @@
 #! /bin/env python
 # coding: utf-8
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from model.main import UtilityModel
 from model.db import CategoryModel, ImagesModel
 from werkzeug import secure_filename
@@ -24,6 +24,7 @@ def index():
 
 
 @main.route("/<category>/")
+@main.errorhandler(404)
 def category(category):
 
   cm = CategoryModel()
@@ -40,9 +41,8 @@ def category(category):
 
     return render_template("category.html", category = category, image_s = image_s)
   else:
-    return render_template("error/404.html")
+    return render_template("error/404.html"), 404
     
-
 @main.route("/<category>/test/")
 def test(category):
 
