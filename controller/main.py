@@ -43,14 +43,7 @@ def category(category):
   else:
     return render_template("error/404.html"), 404
     
-@main.route("/<category>/test/")
-def test(category):
+@main.route("/sitemap.xml")
+def sitemap():
 
-  cm = CategoryModel()
-  um = UtilityModel()
-
-  category_s = cm.get_category() 
-  ret_list = um.dblist_to_dict(category_s)
-  
-  print ret_list
-  return "a"
+  return render_template("sitemap.xml")
