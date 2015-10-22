@@ -1,1 +1,1 @@
-sample Application
+Alpha version sample Web application
